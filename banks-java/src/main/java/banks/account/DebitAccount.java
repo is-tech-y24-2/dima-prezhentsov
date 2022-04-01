@@ -17,7 +17,7 @@ public class DebitAccount extends Account {
 
     @Override
     public Transaction withdrawMoney(double value) {
-        if (balance - value <= 0) {
+        if (balance - value <= constant.PERMISSIBLE_VALUE) {
             throw new BankException("Not enough money");
         }
 
@@ -30,7 +30,7 @@ public class DebitAccount extends Account {
 
     @Override
     public Transaction transfer(double value, Account account) {
-        if (balance - value < 0) {
+        if (balance - value < constant.PERMISSIBLE_VALUE) {
             throw new BankException("not enough money");
         }
 
@@ -39,8 +39,8 @@ public class DebitAccount extends Account {
 
     @Override
     public void passDay() {
-        accumulation += (yearPercent / 365) * balance;
-        if (dayPassed % 30 == 0) {
+        accumulation += (yearPercent / constant.YEARS_DAY) * balance;
+        if (dayPassed % constant.MONTH_DAYS == 0) {
             balance += accumulation;
             accumulation = 0;
         }

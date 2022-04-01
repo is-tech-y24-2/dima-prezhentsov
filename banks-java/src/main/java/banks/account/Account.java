@@ -2,22 +2,21 @@ package banks.account;
 
 import banks.entity.Person;
 import banks.tool.AccountTypes;
+import banks.tool.Constant;
 import banks.tool.Transaction;
 
 public abstract class Account implements IAccount {
     private static int id;
-    protected double withdrawLimit;
-    protected int accountId;
-    protected double balance;
-    protected double yearPercent;
-    protected double commission;
-    protected int dayLimit;
+    protected int accountId, dayLimit;
+    protected double withdrawLimit, balance;
+    protected double yearPercent, commission;
     protected double accumulation;
-    protected int dayPassed;
     protected double creditLimit;
-    protected Person person;
+    protected int dayPassed;
     protected boolean isSuspicionPerson;
+    protected Person person;
     protected AccountTypes typeOfAccount;
+    protected Constant constant;
 
     public Account(double balance, Person person) {
         this.balance = balance;
@@ -32,6 +31,7 @@ public abstract class Account implements IAccount {
         withdrawLimit = 0;
         isSuspicionPerson = person.getPassportId() == 0;
         typeOfAccount = AccountTypes.Default;
+        constant = new Constant();
     }
 
     public double getWithdrawLimit() {

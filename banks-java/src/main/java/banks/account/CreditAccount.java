@@ -31,11 +31,11 @@ public class CreditAccount extends Account{
 
     @Override
     public void passDay() {
-        if (balance < 0) {
+        if (balance < constant.PERMISSIBLE_VALUE) {
             accumulation += commission;
         }
 
-        if (dayPassed % 30 == 0) {
+        if (dayPassed % constant.MONTH_DAYS == 0) {
             balance -= accumulation;
             accumulation = 0;
         }
