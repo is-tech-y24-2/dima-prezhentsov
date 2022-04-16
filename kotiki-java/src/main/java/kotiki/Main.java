@@ -11,8 +11,8 @@ import java.sql.Date;
 public class Main {
     public static void main(String[] args) {
         CatsService catsService = new CatsService();
-        CatsEntity cat = catsService.getById(6);
-        CatsEntity friend = catsService.getById(5);
+        CatsEntity cat = catsService.getById(3);
+        CatsEntity friend = catsService.getById(4);
 //        System.out.println(cat.getName() + " " + friend.getName());
         catsService.addFriendToCat(cat, friend);
     }

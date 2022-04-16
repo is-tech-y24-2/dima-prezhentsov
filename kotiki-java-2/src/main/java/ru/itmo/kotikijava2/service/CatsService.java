@@ -77,16 +77,15 @@ public class CatsService {
         if (cat.getFriends().stream().anyMatch(catsEntity -> catsEntity.getCatId() == friend.getCatId())) {
             throw new RuntimeException("friends already made");
         }
-        cat.addFriend(friend);
-        friend.addFriend(cat);
+
         FriendsEntity friends1 = new FriendsEntity();
         friends1.setFirstCat(cat.getCatId());
         friends1.setSecondCat(friend.getCatId());
         friendsRepository.save(friends1);
-//        FriendsEntity friends2 = new FriendsEntity();
-//        friends2.setFirstCat(friend.getCatId());
-//        friends2.setSecondCat(cat.getCatId());
-//        friendsRepository.save(friends2);
+        FriendsEntity friends2 = new FriendsEntity();
+        friends2.setFirstCat(friend.getCatId());
+        friends2.setSecondCat(cat.getCatId());
+        friendsRepository.save(friends2);
     }
 
 
