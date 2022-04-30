@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.itmo.kotikijava2.dao.model.OwnersEntity;
+import ru.itmo.kotikijava2.dao.model.UserEntity;
 import ru.itmo.kotikijava2.service.OwnerService;
+import ru.itmo.kotikijava2.service.UserService;
 import ru.itmo.kotikijava2.wrapper.OwnerEntityWrapper;
 import ru.itmo.kotikijava2.wrapper.WrapperBuilder;
 
@@ -24,13 +26,22 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity addOwner(
             @RequestParam String name,
-            @RequestParam String birthDay
+            @RequestParam String birthDay,
+            @RequestParam Integer userId
     ) {
         try {
-            ownerService.add(name, new Date(new SimpleDateFormat("dd.MM.yyyy").parse(birthDay).getTime()));
+            UserEntity userEntity = userService.findUserById(userId);
+            ownerService.add(
+                    name,
+                    new Date(new SimpleDateFormat("dd.MM.yyyy").parse(birthDay).getTime()),
+                    userEntity
+            );
         }
         catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -101,7 +102,7 @@ public class CatController {
         if (cat == null) {
             return new ResponseEntity("cat not found", HttpStatus.BAD_REQUEST);
         }
-        List<CatsEntity> cats = catsService.getCatFriend(cat);
+        Set<CatsEntity> cats = catsService.getCatFriend(cat);
         List<CatsEntityWrapper> catsWrapper =
                 cats.stream()
                 .map(catsEntity -> WrapperBuilder.getCatEntityWrapper(catsEntity))

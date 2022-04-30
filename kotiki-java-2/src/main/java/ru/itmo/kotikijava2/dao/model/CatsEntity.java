@@ -2,9 +2,7 @@ package ru.itmo.kotikijava2.dao.model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "cats", schema = "public", catalog = "postgres")
@@ -36,7 +34,7 @@ public class CatsEntity {
             joinColumns = @JoinColumn(name = "first_cat"),
             inverseJoinColumns = @JoinColumn(name = "second_cat")
     )
-    private List<CatsEntity> friends;
+    private Set<CatsEntity> friends;
 
     public CatsEntity(String name, Date dateOfBirth, String breed, Color color, OwnersEntity owner) {
         this.name = name;
@@ -44,7 +42,7 @@ public class CatsEntity {
         this.color = color.text;
         this.owner = owner;
         this.breed = breed;
-        friends = new ArrayList<>();
+        friends = new HashSet<>();
     }
 
     public CatsEntity() {
@@ -102,6 +100,14 @@ public class CatsEntity {
         friends.add(friend);
     }
 
+    public void setOwner(OwnersEntity owner) {
+        this.owner = owner;
+    }
+
+    public void setFriends(Set<CatsEntity> friends) {
+        this.friends = friends;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,7 +121,7 @@ public class CatsEntity {
         return Objects.hash(name, breed, dateOfBirth, color, catId, owner);
     }
 
-    public List<CatsEntity> getFriends() {
+    public Set<CatsEntity> getFriends() {
         return friends;
     }
 }

@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itmo.kotikijava2.dao.model.CatsEntity;
 import ru.itmo.kotikijava2.dao.model.OwnersEntity;
+import ru.itmo.kotikijava2.dao.model.UserEntity;
 import ru.itmo.kotikijava2.dao.repository.CatRepository;
 import ru.itmo.kotikijava2.dao.repository.FriendsRepository;
 import ru.itmo.kotikijava2.dao.repository.OwnerRepository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OwnerService {
@@ -17,8 +19,8 @@ public class OwnerService {
     @Autowired
     private OwnerRepository ownerRepository;
 
-    public void add(String name, Date birthday) {
-        OwnersEntity ownersEntity = new OwnersEntity(name, birthday);
+    public void add(String name, Date birthday, UserEntity user) {
+        OwnersEntity ownersEntity = new OwnersEntity(name, birthday, user);
         ownerRepository.save(ownersEntity);
     }
 
@@ -34,7 +36,7 @@ public class OwnerService {
         return ownerRepository.getById(id);
     }
 
-    public List<CatsEntity> getCats(OwnersEntity ownersEntity) {
+    public Set<CatsEntity> getCats(OwnersEntity ownersEntity) {
         return ownersEntity.getCats();
     }
 
