@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/hello")
 public class HelloController {
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity helloAll() {
         return ResponseEntity.ok("<h2>Hello Everyone!</h2>");
     }
+//    @GetMapping(path = "/addOwner")
+//    public String addOwnerPage() {
+//        return "add";
+//    }
 }

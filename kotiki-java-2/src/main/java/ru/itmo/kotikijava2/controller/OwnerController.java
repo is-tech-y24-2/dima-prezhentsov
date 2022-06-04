@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +51,7 @@ public class OwnerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getOwnerById(@RequestParam(required = false) Integer id) {
+    public ResponseEntity getOwnerById(@RequestParam(required = true) Integer id) {
         if (id != null) {
             OwnersEntity owner = ownerService.getById((int) id);
             if (owner == null) {
@@ -68,4 +69,10 @@ public class OwnerController {
                 .collect(Collectors.toList());
         return new ResponseEntity(ownerWrappers, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/addOwner")
+    public String ownerPage() {
+        return "add";
+    }
+
 }
