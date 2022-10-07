@@ -1,4 +1,4 @@
-package ru.itmo.kotikijava2.dao.model;
+package ru.itmo.kotikiservices.dao.model;
 
 import javax.persistence.*;
 import java.util.Objects;

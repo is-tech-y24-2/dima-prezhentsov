@@ -14,6 +14,7 @@ import ru.itmo.kotikijava2.wrapper.CatsEntityWrapper;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CatsService {
@@ -63,7 +64,7 @@ public class CatsService {
         return catRepository.findAll();
     }
 
-    public List<CatsEntity> getCatFriend(CatsEntity cat) {
+    public Set<CatsEntity> getCatFriend(CatsEntity cat) {
         return cat.getFriends();
     }
 

@@ -1,8 +1,10 @@
-package ru.itmo.kotikijava2.dao.model;
+package ru.itmo.kotikiservices.dao.model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "cats", schema = "public", catalog = "postgres")
@@ -119,6 +121,25 @@ public class CatsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(name, breed, dateOfBirth, color, catId, owner);
+    }
+
+//    @Override
+//    public String toString(){
+//        return name+"_";
+//    }
+
+
+    @Override
+    public String toString() {
+        return "CatsEntity{" +
+                "name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", color='" + color + '\'' +
+                ", catId=" + catId +
+                ", owner=" + owner +
+                ", friends=" + friends +
+                '}';
     }
 
     public Set<CatsEntity> getFriends() {

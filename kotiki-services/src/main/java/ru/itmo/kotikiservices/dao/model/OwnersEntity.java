@@ -1,11 +1,13 @@
-package ru.itmo.kotikijava2.dao.model;
+package ru.itmo.kotikiservices.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "owners", schema = "public", catalog = "postgres")
@@ -26,24 +28,10 @@ public class OwnersEntity {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<CatsEntity> cats;
 
-    @Getter
-    @Setter
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "user_entity_id")
-    private UserEntity userEntity;
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
-    public OwnersEntity(String name, Date dayOfBirth, UserEntity user) {
+    public OwnersEntity(String name, Date dayOfBirth) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
-        this.userEntity = user;
         cats = new HashSet<>();
     }
 
